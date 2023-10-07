@@ -20,7 +20,7 @@ const client = new MongoClient(uri, {
 
 app.get('/', async (req, res) => {
   await client.connect();
-  const collection = client.db("barrys-cool-papa-database").collection("dev-profiles");
+  const collection = client.db("quebec").collection("lab");
   let mongoResult = await collection.find().toArray();
   console.log(mongoResult);
   res.render('index', { profileData: mongoResult });
@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
 
 app.post('/updateProfile', async (req, res) => {
   await client.connect();
-  const collection = client.db("barrys-cool-papa-database").collection("dev-profiles");
+   const collection = client.db("quebec").collection("lab");
   await collection.findOneAndUpdate(
     { _id: new ObjectId(req.body.devId) },
     { $set: { name: req.body.devName } }
@@ -40,7 +40,7 @@ app.post('/updateProfile', async (req, res) => {
 
 app.post('/insertProfile', async (req, res) => {
   await client.connect();
-  const collection = client.db("barrys-cool-papa-database").collection("dev-profiles");
+   const collection = client.db("quebec").collection("lab");
   await collection.insertOne({ name: req.body.newDevName });
   res.redirect('/');
   await client.close();
@@ -48,7 +48,7 @@ app.post('/insertProfile', async (req, res) => {
 
 app.post('/deleteProfile', async (req, res) => {
   await client.connect();
-  const collection = client.db("barrys-cool-papa-database").collection("dev-profiles");
+   const collection = client.db("quebec").collection("lab");
   await collection.findOneAndDelete({ _id: new ObjectId(req.body.devId) });
   res.redirect('/');
   await client.close();
@@ -56,7 +56,7 @@ app.post('/deleteProfile', async (req, res) => {
 
 let myVariableServer = 'soft coded server data';
 
-app.get('/barry', function (req, res) {
+app.get('/vikas', function (req, res) {
   res.render('index', {
     'myVariableClient': myVariableServer
   });
